@@ -22,23 +22,14 @@ router.post("/", async (req, res) => {
 
     console.log(typeof(req.body));
 
-    // if (error) 
-    // return res.status(400).send(error.details[0].message);
+    if (error) 
+    return res.status(400).send(error.details[0].message);
   
-    // let user = await User.findOne({ email: req.body.email });
-    // if (user)
-    //  return res.status(400).send("User already registered.");
-  
-    // user = new User(req.body);
+    user = new User(req.body);
 
-    // const result = await user.save();
-    // console.log(result);
-
-    console.log("Hello World");
-
-    console.log(req.body);
-
-    res.send(req.body);
+    let result = await user.save();
+    delete result.password
+    res.send(result);
     
   });
 
